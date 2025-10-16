@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Love Counter</title>
+  <style>
+    body { font-family: Arial, sans-serif; text-align: center; margin-top: 50px; }
+    button {
+      padding: 10px 20px;
+      margin: 5px;
+      font-size: 16px;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+    }
+    #count { font-size: 24px; margin: 20px; }
+    #heart {
+      font-size: 48px;
+      margin-top: 20px;
+      display: none;
+      user-select: none;
+    }
+    .red { color: #e63946; }
+    .blue { color: #457b9d; }
+  </style>
+</head>
+<body>
+  <h1>Love Counter</h1>
+  <p>Current Count: <span id="count">0</span></p>
+  <button id="increaseBtn">Increase</button>
+  <button id="decreaseBtn">Decrease</button>
+  <button id="resetBtn">Reset</button>
+  <div id="heart">❤️</div>
+
+  <script>
+    let count = 0;
+
+    const countSpan = document.getElementById('count');
+    const heart = document.getElementById('heart');
+    const increaseBtn = document.getElementById('increaseBtn');
+    const decreaseBtn = document.getElementById('decreaseBtn');
+    const resetBtn = document.getElementById('resetBtn');
+
+    function update() {
+      countSpan.textContent = count;
+    }
+
+    function showHeart(color) {
+      heart.style.display = 'block';
+      heart.className = color;
+      heart.textContent = (color === 'red') ? '❤️' : '💙';
+    }
+
+    function hideHeart() {
+      heart.style.display = 'none';
+    }
+
+    function increase() {
+      count++;
+      update();
+      showHeart('red');
+    }
+
+    function decrease() {
+      count--;
+      update();
+      showHeart('blue');
+    }
+
+    function reset() {
+      count = 0;
+      update();
+      hideHeart();
+    }
+
+    increaseBtn.addEventListener('click', increase);
+    increaseBtn.addEventListener('touchend', (e) => { e.preventDefault(); increase(); });
+
+    decreaseBtn.addEventListener('click', decrease);
+    decreaseBtn.addEventListener('touchend', (e) => { e.preventDefault(); decrease(); });
+
+    resetBtn.addEventListener('click', reset);
+    resetBtn.addEventListener('touchend', (e) => { e.preventDefault(); reset(); });
+  </script>
+</body>
+</html>
